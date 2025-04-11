@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portafolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #5a94e2, #357ec7);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      background: transparent;
+      color: white;
+    }
+
+    .profile-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #ff3cac;
+      margin-bottom: 1rem;
+      object-fit: cover;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .socials a img {
+      width: 30px;
+      height: 30px;
+      transition: transform 0.2s ease;
+    }
+
+    .socials a:hover img {
+      transform: scale(1.2);
+    }
+
+    .project {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 2px solid white;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .project:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .project img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .project span {
+      font-weight: bold;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e" alt="Foto de perfil" class="profile-img">
+    <h2>Portfolio</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.
+      Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
+    </p>
+
+    <div class="socials">
+        <a href="https://www.facebook.com/p/OMEGA-Imagen-y-Laboratorio-100066819188002/" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" />
+        </a>
+      <a href="#" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" /></a>
+      
+      <a href="https://www.instagram.com/omegaimagenlaboratorio/" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" />
+        </a>
+    </div>
+
+    <a href="#" class="project">
+      <img src="https://source.unsplash.com/60x40/?technology" alt="Proyecto 1">
+      <span>ESPilar</span>
+    </a>
+    <a href="#" class="project">
+      <img src="https://source.unsplash.com/60x40/?comic" alt="Proyecto 2">
+      <span>Museu del comic</span>
+    </a>
+    <a href="#" class="project">
+      <img src="https://source.unsplash.com/60x40/?developer" alt="Proyecto 3">
+      <span>Jorge Lázaro</span>
+    </a>
+    <a href="#" class="project">
+      <img src="https://source.unsplash.com/60x40/?vr" alt="Proyecto 4">
+      <span>IAMVR</span>
+    </a>
+  </div>
+</body>
+</html>
