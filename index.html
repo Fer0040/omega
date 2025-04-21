@@ -1,245 +1,1144 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OMEGA</title>
-  <link href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShkBsbUL2lKb-xG529KwMxDJU89pQq44cZgg&s" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Roboto', sans-serif;
-    }
-
-    body {
-      background: linear-gradient(to bottom, #3cc4ff, #357ec7);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-
-    .card {
-      background-color: white;
-      border-radius: 12px;
-      padding: 2rem;
-      max-width: 400px;
-      width: 100%;
-      text-align: center;
-      background: transparent;
-      color: white;
-    }
-
-    .profile-img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 3px solid #ff3cac;
-      margin-bottom: 1rem;
-      object-fit: cover;
-    }
-
-    .story-container {
-      position: relative;
-      width: 100%;
-      height: 300px; /* Aumentar la altura para mostrar imágenes completas */
-      overflow: hidden;
-      margin-bottom: 1rem;
-    }
-
-    .story {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 0.5s;
-    }
-
-    .story img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain; /* Cambiar a contain para mostrar la imagen completa */
-      border-radius: 12px;
-    }
-
-    .story.active {
-      opacity: 1;
-    }
-
-    .arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(255, 255, 255, 0.7);
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      padding: 10px;
-      z-index: 10;
-    }
-
-    .arrow.left {
-      left: 10px;
-    }
-
-    .arrow.right {
-      right: 10px;
-    }
-
-    h2 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.5;
-    }
-
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .socials a img {
-      width: 30px;
-      height: 30px;
-      transition: transform 0.2s ease;
-    }
-
-    .socials a:hover img {
-      transform: scale(1.2);
-    }
-
-    .project {
-      background-color: rgba(255, 255, 255, 0.1);
-      border: 2px solid white;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      padding: 0.75rem 1rem;
-      text-align: left;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      color: white;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-
-    .project:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .project img {
-      width: 40px;
-      height: 40px;
-      object-fit: cover;
-      border-radius: 5px;
-    }
-
-    .project span {
-      font-weight: bold;
-    }
-
-    @media (max-width: 480px) {
-      .card {
-        padding: 1.5rem;
-      }
-    }
-  </style>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>OMEGA</title>
+    <link href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShkBsbUL2lKb-xG529KwMxDJU89pQq44cZgg&s" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #74cdf4 , #aae1f9);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Mejorado el perfil central y su animación */
+        .profile-ring {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            cursor: pointer;
+        }
+        
+        .profile-ring::before {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888, #e6683c, #f09433);
+            animation: spin 4s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            position: absolute;
+            z-index: 1;
+            border: 2px solid white;
+        }
+        
+        .story-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .story {
+            position: relative;
+            max-width: 80%;
+            height: 80vh;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .story.active {
+            display: flex;
+        }
+        
+        .story img {
+            max-height: 80%;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+        
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 12px 15px;
+            z-index: 10;
+            font-size: 18px;
+        }
+        
+        .arrow.left {
+            left: 20px;
+        }
+        
+        .arrow.right {
+            right: 20px;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .interaction-bar {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            color: white;
+        }
+        
+        .left-actions, .right-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .count {
+            font-size: 0.9rem;
+        }
+        
+        .comment-section {
+            position: absolute;
+            bottom: 70px;
+            left: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 15px;
+            display: none;
+            z-index: 1002;
+        }
+        
+        .comments-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        
+        .comment {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .comment-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+        
+        .comment-content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 12px;
+            border-radius: 15px;
+            flex: 1;
+        }
+        
+        .comment-input-container {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .comment-input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .comment-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .send-btn {
+            background: #357ec7;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .welcome-section {
+            padding: 40px 20px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .socials a img {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.2s ease;
+        }
+        
+        .socials a:hover img {
+            transform: scale(1.2);
+        }
+        
+        .project {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid white;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        
+        .project:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .project img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .project span {
+            font-weight: bold;
+        }
+        
+        .promotions {
+            margin-top: 30px;
+        }
+        
+        .promotion-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .instagram-post {
+            background: #a0cde0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .post-header img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .post-username {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .post-image-container {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+        }
+        
+        .post-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .post-controls {
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .post-actions-left {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .post-likes {
+            padding: 0 15px 5px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .post-caption {
+            padding: 0 15px 10px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .post-date {
+            padding: 0 15px 15px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Sistema de comentarios para el post */
+        .post-comments {
+            padding: 10px 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .post-comment {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .post-comment-content {
+            flex: 1;
+        }
+        
+        .post-comment-input {
+            display: flex;
+            padding: 10px 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            align-items: center;
+        }
+        
+        .post-comment-input input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            color: white;
+            padding: 8px;
+            outline: none;
+        }
+        
+        .post-comment-input button {
+            background: none;
+            border: none;
+            color: #3897f0;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            gap: 5px;
+        }
+        
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+        
+        .carousel-dot.active {
+            background-color: #3cc4ff;
+        }
+        
+        .whatsapp-btn {
+            display: block;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            padding: 12px 0;
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+        }
+        
+        .whatsapp-icon {
+            margin-right: 8px;
+        }
+        
+        /* Mensaje de promoción temporal */
+        .promo-message {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 1003;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        /* Logo centrado mejorado */
+        .centered-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+            z-index: 5;
+            border: 3px solid white;
+        }
+        
+        @media (max-width: 480px) {
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .comment-section {
+                bottom: 60px;
+            }
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
 </head>
 <body>
-  <div class="card">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShkBsbUL2lKb-xG529KwMxDJU89pQq44cZgg&s" alt="Foto de perfil" class="profile-img" onclick="showStoryContainer()">
-    
-    <div class="story-container" id="storyContainer" style="display: none;">
-      <div class="story active" id="story1">
-        <img src="https://i.pinimg.com/736x/82/02/25/820225167b3672fae3b90d1699874c0c.jpg" alt="Historia 1">
-      </div>
-      <div class="story" id="story2">
-        <img src="https://i.pinimg.com/736x/af/11/d4/af11d4accc143427f980909cbf552e06.jpg" alt="Historia 2">
-      </div>
-      <div class="story" id="story3">
-        <img src="https://i.pinimg.com/736x/66/3a/a6/663aa65401671eda63faffe88a437a82.jpg" alt="Historia 3">
-      </div>
-      <button class="arrow left" onclick="prevStory()">&#10094;</button>
-      <button class="arrow right" onclick="nextStory()">&#10095;</button>
+    <div class="card">
+        <div class="profile-ring" onclick="showStoryContainer()">
+            <img alt="Foto de perfil" class="profile-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShkBsbUL2lKb-xG529KwMxDJU89pQq44cZgg&s"/>
+        </div>
+
+        <div class="story-container" id="storyContainer">
+            <button class="close-btn" onclick="hideStoryContainer()">×</button>
+            
+            <div class="promo-message" id="promoMessage">¡Buenas promociones!</div>
+            
+            <div class="story" id="story1">
+                <img alt="Historia 1" src="New/pos7.jpg"/>
+                <!-- <img alt="Logo Omega" class="centered-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShkBsbUL2lKb-xG529KwMxDJU89pQq44cZgg&s"/> -->
+                
+                <div class="interaction-bar">
+                    <div class="left-actions">
+                        <button class="action-btn" onclick="toggleLike(1)">
+                            <i class="far fa-heart" id="likeIcon1"></i>
+                            <span class="count" id="likeCount1">0</span>
+                        </button>
+                        <button class="action-btn" onclick="toggleComments(1)">
+                            <i class="far fa-comment"></i>
+                            <span class="count" id="commentCount1">0</span>
+                        </button>
+                        <button class="action-btn" onclick="shareWhatsApp(1)">
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="right-actions">
+                        <button class="action-btn" onclick="saveStory(1)">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story" id="story2">
+                <img alt="Historia 2" src="New/pos2.png"/>
+                
+                <div class="interaction-bar">
+                    <div class="left-actions">
+                        <button class="action-btn" onclick="toggleLike(2)">
+                            <i class="far fa-heart" id="likeIcon2"></i>
+                            <span class="count" id="likeCount2">0</span>
+                        </button>
+                        <button class="action-btn" onclick="toggleComments(2)">
+                            <i class="far fa-comment"></i>
+                            <span class="count" id="commentCount2">0</span>
+                        </button>
+                        <button class="action-btn" onclick="shareWhatsApp(2)">
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="right-actions">
+                        <button class="action-btn" onclick="saveStory(2)">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story" id="story3">
+                <img alt="Historia 3" src="New/pos3.png"/>
+                
+                <div class="interaction-bar">
+                    <div class="left-actions">
+                        <button class="action-btn" onclick="toggleLike(3)">
+                            <i class="far fa-heart" id="likeIcon3"></i>
+                            <span class="count" id="likeCount3">0</span>
+                        </button>
+                        <button class="action-btn" onclick="toggleComments(3)">
+                            <i class="far fa-comment"></i>
+                            <span class="count" id="commentCount3">0</span>
+                        </button>
+                        <button class="action-btn" onclick="shareWhatsApp(3)">
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="right-actions">
+                        <button class="action-btn" onclick="saveStory(3)">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story" id="story4">
+                <img alt="Historia 3" src="New/pos8.jpg"/>
+                
+                <div class="interaction-bar">
+                    <div class="left-actions">
+                        <button class="action-btn" onclick="toggleLike(3)">
+                            <i class="far fa-heart" id="likeIcon3"></i>
+                            <span class="count" id="likeCount3">0</span>
+                        </button>
+                        <button class="action-btn" onclick="toggleComments(3)">
+                            <i class="far fa-comment"></i>
+                            <span class="count" id="commentCount3">0</span>
+                        </button>
+                        <button class="action-btn" onclick="shareWhatsApp(3)">
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="right-actions">
+                        <button class="action-btn" onclick="saveStory(3)">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="comment-section" id="commentSection">
+                <div class="comments-list" id="commentsList"></div>
+                <div class="comment-input-container" id="commentInputContainer">
+                    <input class="comment-input" id="commentInput" placeholder="Escribe un comentario..." type="text"/>
+                    <button class="send-btn" id="sendCommentBtn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <button class="arrow left" onclick="prevStory()">❮</button>
+            <button class="arrow right" onclick="nextStory()">❯</button>
+        </div>
+
+        <div class="welcome-section">
+            <h1 style="font-size: 2rem; margin-bottom: 20px;">¡Bienvenido a Omega Imagen y Laboratorio!</h1>
+            <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 20px;">
+                Gracias por visitarnos. Síguenos en nuestras redes sociales para descubrir <strong>promociones exclusivas</strong>, noticias importantes y consejos de salud.
+            </p>
+            <h2 style="margin: 0 auto 20px; font-size: 1.4rem;">Tu bienestar es nuestra misión.</h2>
+            <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+                📱 Visita nuestra página web para más información y <strong>agendar</strong> tus servicios fácilmente.
+            </p>
+        </div>
+
+        <div class="socials">
+            <a href="https://www.facebook.com/p/OMEGA-Imagen-y-Laboratorio-100066819188002/" target="_blank">
+                <img alt="Facebook" src="https://cdn-icons-png.flaticon.com/512/733/733547.png"/>
+            </a>
+            <a href="#" target="_blank">
+                <img alt="Twitter" src="https://cdn-icons-png.flaticon.com/512/733/733579.png"/>
+            </a>
+            <a href="https://www.instagram.com/omegaimagenlaboratorio/" target="_blank">
+                <img alt="Instagram" src="https://cdn-icons-png.flaticon.com/512/733/733558.png"/>
+            </a>
+        </div>
+
+        <a class="project" href="https://www.omegalaboratorio.com.mx/" target="_blank">
+            <img alt="Logo Omega" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShkBsbUL2lKb-xG529KwMxDJU89pQq44cZgg&s"/>
+            <span>SITIO WEB</span>
+        </a>
+
+        <div class="promotions">
+            <h2 class="promotion-title">Promociones</h2>
+            
+            <div class="instagram-post" id="promotionPost">
+                <div class="post-header">
+                    <img alt="Perfil Omega" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShkBsbUL2lKb-xG529KwMxDJU89pQq44cZgg&s"/>
+                    <span class="post-username">omegaimagenlaboratorio</span>
+                </div>
+                
+                <div class="post-image-container">
+                    <img alt="Promoción" class="post-image" id="promotionImage" src="New/pos1.png"/>
+                </div>
+                
+                <div class="post-controls">
+                    <div class="post-actions-left">
+                        <button class="action-btn" onclick="togglePostLike()">
+                            <i class="far fa-heart" id="postLikeIcon"></i>
+                            <span class="count" id="postLikeCount">0</span>
+                        </button>
+                        <button class="action-btn" onclick="togglePostComments()">
+                            <i class="far fa-comment"></i>
+                            <span class="count" id="postCommentCount">0</span>
+                        </button>
+                        <button class="action-btn" onclick="sharePostWhatsApp()">
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <button class="action-btn" onclick="togglePostBookmark()">
+                        <i class="far fa-bookmark" id="postBookmarkIcon"></i>
+                    </button>
+                </div>
+                
+                <div class="post-likes" id="postLikes">0 Me gusta</div>
+                
+                <div class="post-caption">
+                    <strong>omegaimagenlaboratorio</strong> ¡No te pierdas nuestra promoción especial! Aprovecha estos precios increíbles por tiempo limitado. #SaludParaTodos #OmegaLaboratorio
+                </div>
+                
+                <div class="post-date">Publicado hace 2 días</div>
+                
+                <!-- Sistema de comentarios para el post (inicialmente oculto) -->
+                <div class="post-comments" id="postComments" style="display: none;">
+                    <!-- Los comentarios se cargarán dinámicamente aquí -->
+                </div>
+                
+                <div class="post-comment-input" id="postCommentInput" style="display: none;">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShkBsbUL2lKb-xG529KwMxDJU89pQq44cZgg&s" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 10px;">
+                    <input type="text" id="postCommentText" placeholder="Añade un comentario..." style="flex: 1;">
+                    <button id="postCommentBtn">Publicar</button>
+                </div>
+            </div>
+            
+            <div class="carousel-nav">
+                <div class="carousel-dot active" onclick="changePromoImage(0)"></div>
+                <div class="carousel-dot" onclick="changePromoImage(1)"></div>
+                <div class="carousel-dot" onclick="changePromoImage(2)"></div>
+            </div>
+            
+            <a class="whatsapp-btn" href="https://wa.me/5212216380960" target="_blank">
+                <i class="fab fa-whatsapp whatsapp-icon"></i>
+                Más información por WhatsApp
+            </a>
+        </div>
     </div>
 
-    <div style="padding: 40px 20px; line-height: 1.5; margin-bottom: 50px; text-align: center;">
-        <h1 style="font-size: 2rem; margin-bottom: 20px;">¡Bienvenido a Omega Imagen y Laboratorio!</h1>
-      
-        <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 20px;">
-          Gracias por visitarnos. Síguenos en nuestras redes sociales para descubrir <strong>promociones exclusivas</strong>, 
-          noticias importantes y tips de salud.
-        </p>
-      
-        <h2 style="margin: 0 auto 20px; font-size: 1.4rem;">Tu bienestar es nuestra misión.</h2>
-      
-        <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
-          📱 Visita también nuestra página web oficial para más información y <strong>agendar</strong> tus servicios fácilmente.
-        </p>
-      </div>
-      
-      
+    <script>
+        // Variables globales
+        let currentStory = 0;
+        const stories = document.querySelectorAll('.story');
+        const promotionImages = [
+            "New/pos4.jpg",
+            "New/pos5.jpg",
+            "New/pos6.png"
+        ];
+        let currentPromoImage = 0;
+        let currentCommentStory = 1;
+        
+        // Almacenamiento de comentarios
+        const comments = {
+            1: [],
+            2: [],
+            3: []
+        };
+        
+        // Almacenamiento de likes
+        let postLikes = 0;
+        let likeCounts = {
+            1: 0,
+            2: 0,
+            3: 0
+        };
+        
+        // Control de comentarios en historias
+        let hasCommented = {
+            1: false,
+            2: false,
+            3: false
+        };
+        
+        // Comentarios del post
+        let postComments = [];
+        
 
-    <div class="socials">
-        <a href="https://www.facebook.com/p/OMEGA-Imagen-y-Laboratorio-100066819188002/" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" />
-        </a>
-        <a href="#" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" /></a>
-        <a href="https://www.instagram.com/omegaimagenlaboratorio/" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" />
-        </a>
-    </div>
+        
 
-    <a href="https://www.omegalaboratorio.com.mx/" class="project" target="_blank">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShkBsbUL2lKb-xG529KwMxDJU89pQq44cZgg&s" alt="ESPilar">
-        <span>SITIO WEB</span>
-    </a>
-  </div>
 
-  <script>
-    let currentStory = 0;
-    const stories = document.querySelectorAll('.story');
 
-    function showStoryContainer() {
-        document.getElementById('storyContainer').style.display = 'block';
-        showStory(currentStory);
-    }
+        // Mostrar contenedor de historias
+        function showStoryContainer() {
+            document.getElementById('storyContainer').style.display = 'flex';
+            showStory(currentStory);
+            
+            // Mostrar mensaje de promoción temporal
+            const promoMessage = document.getElementById('promoMessage');
+            promoMessage.style.opacity = '1';
+            
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                promoMessage.style.opacity = '0';
+            }, 5000);
+        }
 
-    function showStory(index) {
-        stories.forEach((story, i) => {
-            story.classList.remove('active');
-            if (i === index) {
-                story.classList.add('active');
+        // Ocultar contenedor de historias
+        function hideStoryContainer() {
+            document.getElementById('storyContainer').style.display = 'none';
+            document.getElementById('commentSection').style.display = 'none';
+        }
+
+        // Mostrar historia específica
+        function showStory(index) {
+            stories.forEach((story, i) => {
+                if (i === index) {
+                    story.classList.add('active');
+                } else {
+                    story.classList.remove('active');
+                }
+            });
+            currentStory = index;
+        }
+
+        // Navegación entre historias
+        function nextStory() {
+            currentStory = (currentStory + 1) % stories.length;
+            showStory(currentStory);
+            document.getElementById('commentSection').style.display = 'none';
+        }
+
+        function prevStory() {
+            currentStory = (currentStory - 1 + stories.length) % stories.length;
+            showStory(currentStory);
+            document.getElementById('commentSection').style.display = 'none';
+        }
+
+        // Función para dar "me gusta" a una historia
+        function toggleLike(storyId) {
+            const likeIcon = document.getElementById(`likeIcon${storyId}`);
+            const likeCount = document.getElementById(`likeCount${storyId}`);
+            
+            if (likeIcon.classList.contains('far')) {
+                likeIcon.classList.remove('far');
+                likeIcon.classList.add('fas');
+                likeIcon.style.color = '#ed4956';
+                likeCounts[storyId]++;
+            } else {
+                likeIcon.classList.remove('fas');
+                likeIcon.classList.add('far');
+                likeIcon.style.color = '';
+                likeCounts[storyId]--;
             }
+            
+            likeCount.textContent = likeCounts[storyId];
+        }
+
+        // Función para mostrar/ocultar sección de comentarios
+        function toggleComments(storyId) {
+            const commentSection = document.getElementById('commentSection');
+            currentCommentStory = storyId;
+            
+            // Si ya comentó, solo mostrar los comentarios
+            if (hasCommented[storyId]) {
+                updateCommentsList();
+                commentSection.style.display = 'block';
+                document.getElementById('commentInputContainer').style.display = 'none';
+                return;
+            }
+            
+            if (commentSection.style.display === 'block') {
+                commentSection.style.display = 'none';
+            } else {
+                updateCommentsList();
+                commentSection.style.display = 'block';
+                document.getElementById('commentInputContainer').style.display = 'flex';
+            }
+        }
+
+        // Actualizar la lista de comentarios
+        function updateCommentsList() {
+            const commentsList = document.getElementById('commentsList');
+    commentsList.innerHTML = '';
+    
+    // Mostrar comentarios existentes
+    comments[currentCommentStory].forEach(comment => {
+        const commentEl = document.createElement('div');
+        commentEl.className = 'comment';
+        commentEl.innerHTML = `
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShkBsbUL2lKb-xG529KwMxDJU89pQq44cZgg&s" class="comment-avatar" alt="Avatar">
+            <div class="comment-content">
+                <strong>Usuario</strong>: ${comment}
+            </div>
+        `;
+        commentsList.appendChild(commentEl);
+    });
+    
+    // Actualizar contador de comentarios
+    document.getElementById(`commentCount${currentCommentStory}`).textContent = comments[currentCommentStory].length;
+}
+
+// Función para enviar comentario
+document.getElementById('sendCommentBtn').addEventListener('click', function() {
+    const commentInput = document.getElementById('commentInput');
+    const commentText = commentInput.value.trim();
+    
+    if (commentText) {
+        // Añadir comentario a la lista
+        comments[currentCommentStory].push(commentText);
+        
+        // Marcar como comentado
+        hasCommented[currentCommentStory] = true;
+        
+        // Actualizar lista de comentarios
+        updateCommentsList();
+        
+        // Limpiar campo de entrada
+        commentInput.value = '';
+        
+        // Ocultar input de comentario después de comentar
+        document.getElementById('commentInputContainer').style.display = 'none';
+    }
+});
+
+// Función para guardar historia
+function saveStory(storyId) {
+    const saveIcon = document.querySelector(`#story${storyId} .right-actions .action-btn i`);
+    
+    if (saveIcon.classList.contains('far')) {
+        saveIcon.classList.remove('far');
+        saveIcon.classList.add('fas');
+        
+        // Mostrar mensaje temporal
+        const promoMessage = document.getElementById('promoMessage');
+        promoMessage.textContent = '¡Historia guardada!';
+        promoMessage.style.opacity = '1';
+        
+        setTimeout(() => {
+            promoMessage.style.opacity = '0';
+        }, 2000);
+    } else {
+        saveIcon.classList.remove('fas');
+        saveIcon.classList.add('far');
+        
+        // Mostrar mensaje temporal
+        const promoMessage = document.getElementById('promoMessage');
+        promoMessage.textContent = 'Historia removida de guardados';
+        promoMessage.style.opacity = '1';
+        
+        setTimeout(() => {
+            promoMessage.style.opacity = '0';
+        }, 2000);
+    }
+}
+
+// Función para compartir en WhatsApp
+function shareWhatsApp(storyId) {
+    const message = encodeURIComponent('¡Mira esta promoción de Omega Imagen y Laboratorio!');
+    const url = encodeURIComponent('https://www.omegalaboratorio.com.mx/');
+    window.open(`https://wa.me/?text=${message}%20${url}`);
+}
+
+// Cambiar imagen de promoción
+function changePromoImage(index) {
+    currentPromoImage = index;
+    document.getElementById('promotionImage').src = promotionImages[index];
+    
+    // Actualizar dots de navegación
+    const dots = document.querySelectorAll('.carousel-dot');
+    dots.forEach((dot, i) => {
+        if (i === index) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+}
+
+// Función para dar "me gusta" al post
+function togglePostLike() {
+    const likeIcon = document.getElementById('postLikeIcon');
+    
+    if (likeIcon.classList.contains('far')) {
+        likeIcon.classList.remove('far');
+        likeIcon.classList.add('fas');
+        likeIcon.style.color = '#ed4956';
+        postLikes++;
+    } else {
+        likeIcon.classList.remove('fas');
+        likeIcon.classList.add('far');
+        likeIcon.style.color = '';
+        postLikes--;
+    }
+    
+    document.getElementById('postLikeCount').textContent = postLikes;
+    document.getElementById('postLikes').textContent = `${postLikes} Me gusta`;
+}
+
+// Función para marcar/desmarcar post
+function togglePostBookmark() {
+    const bookmarkIcon = document.getElementById('postBookmarkIcon');
+    
+    if (bookmarkIcon.classList.contains('far')) {
+        bookmarkIcon.classList.remove('far');
+        bookmarkIcon.classList.add('fas');
+        
+        // Mostrar mensaje temporal
+        const promoMessage = document.getElementById('promoMessage');
+        promoMessage.textContent = '¡Post guardado!';
+        promoMessage.style.opacity = '1';
+        
+        setTimeout(() => {
+            promoMessage.style.opacity = '0';
+        }, 2000);
+    } else {
+        bookmarkIcon.classList.remove('fas');
+        bookmarkIcon.classList.add('far');
+    }
+}
+
+// Función para mostrar/ocultar comentarios del post
+function togglePostComments() {
+    const commentsSection = document.getElementById('postComments');
+    const commentInput = document.getElementById('postCommentInput');
+    
+    if (commentsSection.style.display === 'none') {
+        commentsSection.style.display = 'block';
+        commentInput.style.display = 'flex';
+        updatePostComments();
+    } else {
+        commentsSection.style.display = 'none';
+        commentInput.style.display = 'none';
+    }
+}
+
+// Actualizar comentarios del post
+function updatePostComments() {
+    const commentsSection = document.getElementById('postComments');
+    commentsSection.innerHTML = '';
+    
+    if (postComments.length === 0) {
+        commentsSection.innerHTML = '<div style="padding: 10px; color: rgba(255,255,255,0.7);">No hay comentarios aún. ¡Sé el primero en comentar!</div>';
+    } else {
+        postComments.forEach(comment => {
+            const commentEl = document.createElement('div');
+            commentEl.className = 'post-comment';
+            commentEl.innerHTML = `
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShkBsbUL2lKb-xG529KwMxDJU89pQq44cZgg&s" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%;">
+                <div class="post-comment-content">
+                    <strong>Usuario</strong> ${comment}
+                </div>
+            `;
+            commentsSection.appendChild(commentEl);
         });
     }
+    
+    // Actualizar contador de comentarios
+    document.getElementById('postCommentCount').textContent = postComments.length;
+}
 
-    function nextStory() {
-        currentStory++;
-        if (currentStory >= stories.length) {
-            document.getElementById('storyContainer').style.display = 'none'; // Ocultar contenedor al final
-            currentStory = 0; // Reiniciar el índice si se desea volver a mostrar
-        } else {
-            showStory(currentStory);
+// Añadir evento para enviar comentario en el post
+document.getElementById('postCommentBtn').addEventListener('click', function() {
+    const commentInput = document.getElementById('postCommentText');
+    const commentText = commentInput.value.trim();
+    
+    if (commentText) {
+        // Añadir comentario
+        postComments.push(commentText);
+        
+        // Actualizar lista de comentarios
+        updatePostComments();
+        
+        // Limpiar campo
+        commentInput.value = '';
+    }
+});
+
+// Compartir post por WhatsApp
+function sharePostWhatsApp() {
+    const message = encodeURIComponent('¡Mira esta promoción exclusiva de Omega Imagen y Laboratorio!');
+    const url = encodeURIComponent('https://www.omegalaboratorio.com.mx/');
+    window.open(`https://wa.me/?text=${message}%20${url}`);
+}
+
+// Inicializar al cargar
+document.addEventListener('DOMContentLoaded', function() {
+    // Mejorar el estilo del logo para que esté más centrado
+    const profileRing = document.querySelector('.profile-ring');
+    profileRing.style.position = 'relative';
+    profileRing.style.margin = '0 auto 30px';
+    
+    // Mejorar la animación del aro del logo
+    const styleSheet = document.styleSheets[0];
+    const keyframes = `
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }`;
+    
+    styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
+    
+    // Añadir eventos para teclas de navegación
+    document.addEventListener('keydown', function(e) {
+        if (document.getElementById('storyContainer').style.display === 'flex') {
+            if (e.key === 'ArrowRight') {
+                nextStory();
+            } else if (e.key === 'ArrowLeft') {
+                prevStory();
+            } else if (e.key === 'Escape') {
+                hideStoryContainer();
+            }
         }
-    }
+    });
+    
+    // Inicializar la primera historia
+    showStory(0);
+});
 
-    function prevStory() {
-        currentStory = (currentStory - 1 + stories.length) % stories.length;
-        showStory(currentStory);
+// Cerrar comentarios al hacer clic fuera de ellos
+document.addEventListener('click', function(e) {
+    const commentSection = document.getElementById('commentSection');
+    const commentBtns = document.querySelectorAll('.action-btn');
+    
+    let clickedCommentBtn = false;
+    commentBtns.forEach(btn => {
+        if (btn.contains(e.target) && btn.querySelector('i').classList.contains('fa-comment')) {
+            clickedCommentBtn = true;
+        }
+    });
+    
+    if (!clickedCommentBtn && 
+        !commentSection.contains(e.target) && 
+        commentSection.style.display === 'block') {
+        commentSection.style.display = 'none';
     }
+});
 
-    // Mostrar la primera historia al cargar
-    showStory(currentStory);
-  </script>
+// Rotación automática de imágenes de promoción
+let carouselInterval = setInterval(() => {
+    currentPromoImage = (currentPromoImage + 1) % promotionImages.length;
+    changePromoImage(currentPromoImage);
+}, 5000);
+
+// Detener rotación cuando el usuario interactúa con el carrusel
+document.querySelectorAll('.carousel-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+        clearInterval(carouselInterval);
+        // Reiniciar intervalo después de 10 segundos de inactividad
+        setTimeout(() => {
+            carouselInterval = setInterval(() => {
+                currentPromoImage = (currentPromoImage + 1) % promotionImages.length;
+                changePromoImage(currentPromoImage);
+            }, 5000);
+        }, 10000);
+    });
+});
+</script>
 </body>
 </html>
+
+
+
+
