@@ -733,9 +733,14 @@
         let currentStory = 0;
         const stories = document.querySelectorAll('.story');
         const promotionImages = [
+            "New/pos2.png",
+            "New/pos3.png",
             "New/pos4.jpg",
             "New/pos5.jpg",
-            "New/pos6.png"
+            "New/pos6.png",
+            "New/pos7.jpg",
+            "New/pos8.jpg",
+            "New/pos1.png"
         ];
         let currentPromoImage = 0;
         let currentCommentStory = 1;
@@ -744,7 +749,12 @@
         const comments = {
             1: [],
             2: [],
-            3: []
+            3: [],
+            4: [],
+            5: [],
+            6: [],
+            7: [],
+            8: []
         };
         
         // Almacenamiento de likes
@@ -752,14 +762,24 @@
         let likeCounts = {
             1: 0,
             2: 0,
-            3: 0
+            3: 0,
+            4: 0,
+            5: 0,
+            6: 0,
+            7: 0,
+            8: 0
         };
         
         // Control de comentarios en historias
         let hasCommented = {
             1: false,
             2: false,
-            3: false
+            3: false,
+            4: false,
+            5: false,
+            6: false,
+            7: false,
+            8: false
         };
         
         // Comentarios del post
