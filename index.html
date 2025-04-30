@@ -597,7 +597,57 @@
             </div>
 
             <div class="story" id="story4">
-                <img alt="Historia 3" src="New/pos8.jpg"/>
+                <img alt="Historia 4" src="New/pos8.jpg"/>
+                
+                <div class="interaction-bar">
+                    <div class="left-actions">
+                        <button class="action-btn" onclick="toggleLike(3)">
+                            <i class="far fa-heart" id="likeIcon3"></i>
+                            <span class="count" id="likeCount3">0</span>
+                        </button>
+                        <button class="action-btn" onclick="toggleComments(3)">
+                            <i class="far fa-comment"></i>
+                            <span class="count" id="commentCount3">0</span>
+                        </button>
+                        <button class="action-btn" onclick="shareWhatsApp(3)">
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="right-actions">
+                        <button class="action-btn" onclick="saveStory(3)">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story" id="story4">
+                <img alt="Historia 5" src="New/pos9.jpg"/>
+                
+                <div class="interaction-bar">
+                    <div class="left-actions">
+                        <button class="action-btn" onclick="toggleLike(3)">
+                            <i class="far fa-heart" id="likeIcon3"></i>
+                            <span class="count" id="likeCount3">0</span>
+                        </button>
+                        <button class="action-btn" onclick="toggleComments(3)">
+                            <i class="far fa-comment"></i>
+                            <span class="count" id="commentCount3">0</span>
+                        </button>
+                        <button class="action-btn" onclick="shareWhatsApp(3)">
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="right-actions">
+                        <button class="action-btn" onclick="saveStory(3)">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story" id="story4">
+                <img alt="Historia 6" src="New/pos10.jpg"/>
                 
                 <div class="interaction-bar">
                     <div class="left-actions">
@@ -740,6 +790,8 @@
             "New/pos6.png",
             "New/pos7.jpg",
             "New/pos8.jpg",
+            "New/pos9.jpg",
+            "New/pos10.jpg",
             "New/pos1.png"
         ];
         let currentPromoImage = 0;
@@ -754,7 +806,9 @@
             5: [],
             6: [],
             7: [],
-            8: []
+            8: [],
+            9: [],
+            10: []
         };
         
         // Almacenamiento de likes
@@ -767,7 +821,9 @@
             5: 0,
             6: 0,
             7: 0,
-            8: 0
+            8: 0,
+            9: 0,
+            10: 0
         };
         
         // Control de comentarios en historias
@@ -779,15 +835,14 @@
             5: false,
             6: false,
             7: false,
-            8: false
+            8: false,
+            9: false,
+            10: false
         };
         
         // Comentarios del post
         let postComments = [];
         
-
-        
-
 
 
         // Mostrar contenedor de historias
@@ -1155,6 +1210,8 @@ document.querySelectorAll('.carousel-dot').forEach(dot => {
         }, 10000);
     });
 });
+
+
 </script>
 </body>
 </html>
